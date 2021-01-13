@@ -1,0 +1,17 @@
+# Specify a base image
+FROM node:alpine
+
+#if usr/app doesn't exist inside the container, it will automatically be created for you
+WORKDIR /app
+
+#to avoid unncessary builds ...we split copying of package.json which doesn't change that often and is required to run npm install command
+COPY package.json .
+
+# Install some depenendencies
+RUN npm install
+
+#if index.js changes often, all the above steps can be retrieved from the cache. 
+COPY . .
+
+# Default command
+CMD ["npm", "run","start"]
