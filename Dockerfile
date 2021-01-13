@@ -17,4 +17,5 @@ RUN npm run build
 
 #create an image from nginx - copy stuff from the previsou step and dumps it. nginx starts automatically
 FROM nginx
+EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
