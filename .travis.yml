@@ -1,13 +1,26 @@
+#Telling travis that we need super user permission to run our build
 sudo: required
+
+# Telling travis that we need a copy of docker ready to go
 services:
     - docker
-    
+
+# create a docker image
 before_install:
     - docker build -t ashah1519/docker-react -f Dockerfile.dev .
-    
+
+# it should contain all the commands that we need to run to execute our test suite. If retunCode other than 0, it will assume that our test suite failed and the code is broken.
+# Travis CI assumes that our test suite will run and exit automatically. 
+# Default behaviour of "npm run test" is that once its done running the tests, it will present the menu of what to do next. If will never exit automatically. It just sits there. 
 script:
     - docker run -e CI=true ashah1519/docker-react npm run test
-    
+
+# most of the information comes from elasticbeanstalk created on AWS. the app is the name of the app that was created on elasticbeanstalk
+# bucker_name: travis zips up the code and puts it on S3(scalable) storage to be used by elasticbeanstalk. bucket_name is essentially S3 storage name from AWS
+# bucket_path is the name of the folder
+# branch:master - any time we push the code to master branch, that's the time to deploy it to the production
+# access_key_id
+# secret_access_key
 deploy:
     provider: elasticbeanstalk
     region: "us-east-2"
