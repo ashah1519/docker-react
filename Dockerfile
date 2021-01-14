@@ -17,5 +17,6 @@ RUN npm run build
 
 #create an image from nginx - copy stuff from the previsou step and dumps it. nginx starts automatically
 FROM nginx
+# The elasticbeanstalk is going to look at this docker file and look for the EXPOSE instruction and map that port automatically
 EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
