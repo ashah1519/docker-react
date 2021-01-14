@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload. Hello World Docker rocks sure..HMM!!!
+          Edit <code>src/App.js</code> and save to reload. Hello World Docker rocks sure..HMM!!! New feature coming SOON !
         </p>
         <a
           className="App-link"
